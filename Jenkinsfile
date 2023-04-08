@@ -3,6 +3,10 @@ pipeline{
     tools{
         maven 'maven'
     }
+
+    environment{
+        DOCKERHUB_USERNAME = credentials('')
+    }
     stages{
         stage('Checkout'){
             steps{
@@ -38,8 +42,8 @@ pipeline{
 
         stage ("push to dockerHub"){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'docker-credentialsPassword', usernameVariable: 'docker-credentialsUser')]) {
-                sh "docker login -u ${env.docker-credentialsUser} -p ${env.docker-credentialsPassword}"
+                withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                sh "docker login -u $USERNAME -p $PASSWORD"
                 sh 'docker push jenkinsfile_jaja_k8s:latest'
                 }     
             }
