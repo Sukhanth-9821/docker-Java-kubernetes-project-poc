@@ -44,7 +44,7 @@ pipeline{
             steps{
                 withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                 sh "docker login -u $USERNAME -p $PASSWORD"
-                sh 'docker push jenkinsfile_jaja_k8s:latest'
+                sh 'docker push sukhanth/jenkinsfile_jaja_k8s:latest'
                 }     
             }
         }
