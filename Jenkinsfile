@@ -15,17 +15,33 @@ pipeline{
                 sh 'mvn -f productcatalogue/pom.xml clean install package'
             }
         }
-        stage ("maven build 2"){
+        // stage ("maven build 2"){
+        //     steps{
+        //         sh 'cd shopfront'
+        //         sh 'mvn -f shopfront/pom.xml clean install package'
+        //     }
+        // }
+        //  stage ("maven build 3"){
+        //     steps{
+        //         sh 'cd stockmanager'
+        //         sh 'mvn -f stockmanager/pom.xml clean install package'
+        //     }
+        // }
+        stage ("Docker image build"){
             steps{
-                sh 'cd shopfront'
-                sh 'mvn -f shopfront/pom.xml clean install package'
+                sh 'sudo docker build -t jenkinsfile_jaja_k8s:latest ./productcatalogue'
+                sh 'echo docker images'
             }
         }
-         stage ("maven build 3"){
-            steps{
-                sh 'cd stockmanager'
-                sh 'mvn -f stockmanager/pom.xml clean install package'
-            }
-        }
+
+
+        // stage ("push to dockerHub"){
+        //     steps{
+        //         withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'docker-credentialsPassword', usernameVariable: 'docker-credentialsUser')]) {
+        //         sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+        //         //sh 'docker push"
+        //         }     
+        //     }
+        // }
     }
 }
