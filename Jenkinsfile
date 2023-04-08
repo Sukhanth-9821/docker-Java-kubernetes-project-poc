@@ -12,19 +12,19 @@ pipeline{
         stage ("maven build 1"){
             steps{
                 sh 'cd productcatalogue'
-                sh 'mvn clean install package'
+                sh 'mvn -f productcatalogue/pom.xml clean install package'
             }
         }
         stage ("maven build 2"){
             steps{
                 sh 'cd shopfront'
-                sh 'mvn clean install package'
+                sh 'mvn -f shopfront/pom.xml clean install package'
             }
         }
          stage ("maven build 3"){
             steps{
                 sh 'cd stockmanager'
-                sh 'mvn clean install package'
+                sh 'mvn -f stockmanager/pom.xml clean install package'
             }
         }
     }
