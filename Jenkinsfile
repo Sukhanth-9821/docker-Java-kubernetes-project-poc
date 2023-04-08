@@ -30,19 +30,19 @@ pipeline{
         stage ("Docker image build"){
             steps{
                 sh 'sudo docker build -t jenkinsfile_jaja_k8s:latest ./productcatalogue'
-                sh '$images = sudo docker images'
-                sh 'echo $images'
+                // sh '$images = sudo docker images'
+                // sh 'echo $images'
             }
         }
 
 
-        // stage ("push to dockerHub"){
-        //     steps{
-        //         withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'docker-credentialsPassword', usernameVariable: 'docker-credentialsUser')]) {
-        //         sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-        //         //sh 'docker push"
-        //         }     
-        //     }
-        // }
+        stage ("push to dockerHub"){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'docker-credentialsPassword', usernameVariable: 'docker-credentialsUser')]) {
+                sh "docker login -u ${env.docker-credentialsUser} -p ${env.docker-credentialsPassword}"
+                sh 'docker push jenkinsfile_jaja_k8s:latest"
+                }     
+            }
+        }
     }
 }
