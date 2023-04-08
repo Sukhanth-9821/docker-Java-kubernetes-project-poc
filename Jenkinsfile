@@ -30,7 +30,7 @@ pipeline{
         stage ("Docker image build"){
             steps{
                 sh 'sudo docker build -t jenkinsfile_jaja_k8s:latest ./productcatalogue'
-                sh 'echo docker images'
+                sh 'echo ${docker images}'
             }
         }
 
