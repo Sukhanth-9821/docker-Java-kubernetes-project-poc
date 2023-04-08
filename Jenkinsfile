@@ -4,9 +4,9 @@ pipeline{
         maven 'maven'
     }
 
-    environment{
-        DOCKERHUB_USERNAME = credentials('')
-    }
+    // environment{
+    //     DOCKERHUB_USERNAME = credentials('')
+    // }
     stages{
         stage('Checkout'){
             steps{
